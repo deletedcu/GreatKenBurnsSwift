@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="KenBurnsProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSJ-Wi-KyZ">
+                                <rect key="frame" x="75.5" y="431.5" width="263" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Present Ken Burns View Controller"/>
+                                <connections>
+                                    <segue destination="gE0-9Y-Aj4" kind="presentation" identifier="showKenBurns" modalPresentationStyle="fullScreen" id="ZqA-0A-5hi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="HSJ-Wi-KyZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="J6k-fU-4tc"/>
+                            <constraint firstItem="HSJ-Wi-KyZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Z8V-sn-gZY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="138"/>
+        </scene>
+        <!--Ken Burns View Controller-->
+        <scene sceneID="OUi-Pb-Usw">
+            <objects>
+                <viewController id="gE0-9Y-Aj4" customClass="KenBurnsViewController" customModule="KenBurnsProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Htg-aw-zK9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-u4-qgd" customClass="KenBurnsView" customModule="KenBurnsProject">
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="900"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0l-Cc-EcE" customClass="ControlsView" customModule="KenBurnsProject" customModuleProvider="target">
+                                <rect key="frame" x="87" y="662" width="240" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="0.30303697183098594" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="I3s-Nf-akn"/>
+                                    <constraint firstAttribute="height" constant="200" id="PLT-Pl-W28"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Ken Burns here to entire background. " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6u3-Bp-GC2">
+                                <rect key="frame" x="44.5" y="437.5" width="325" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6u3-Bp-GC2" firstAttribute="centerY" secondItem="Htg-aw-zK9" secondAttribute="centerY" id="2oF-GK-JBN"/>
+                            <constraint firstItem="d0l-Cc-EcE" firstAttribute="bottom" secondItem="m30-R3-Y72" secondAttribute="bottom" id="CsE-rT-Lcl"/>
+                            <constraint firstItem="6u3-Bp-GC2" firstAttribute="centerX" secondItem="Htg-aw-zK9" secondAttribute="centerX" id="ctu-Ta-YOp"/>
+                            <constraint firstItem="d0l-Cc-EcE" firstAttribute="centerX" secondItem="Htg-aw-zK9" secondAttribute="centerX" id="mBa-Y1-5db"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="m30-R3-Y72"/>
+                    </view>
+                    <connections>
+                        <outlet property="controlsView" destination="d0l-Cc-EcE" id="zlg-Fi-iHW"/>
+                        <outlet property="kenBurnsView" destination="mh5-u4-qgd" id="U1U-tn-7cb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lRQ-Rl-yBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="966.66666666666674" y="137.94642857142856"/>
+        </scene>
+    </scenes>
+</document>
