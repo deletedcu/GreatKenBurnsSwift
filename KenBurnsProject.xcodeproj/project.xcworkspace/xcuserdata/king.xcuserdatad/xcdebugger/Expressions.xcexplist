@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "KenBurnsView.currentImage.getter:KenBurnsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentImageIndex">
+            </PersistentString>
+            <PersistentString
+               value = "imagesArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "KenBurnsViewController.viewDidAppear(_:):KenBurnsViewController.swift">
       </ContextState>
       <ContextState

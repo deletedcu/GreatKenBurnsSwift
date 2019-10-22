@@ -68,7 +68,6 @@ class KenBurnsView: UIView {
     private var portrait: Bool = true
     private var showImageDuration: TimeInterval = 10
     private var shouldLoop: Bool = true
-    private var nextImageIndex: Int = 0
     private var indexOfFirstImageShown = 0
     
     private var finishTransform: CGAffineTransform?
@@ -171,7 +170,9 @@ class KenBurnsView: UIView {
         if subviews.count > 0 {
             subviews[0].layer.removeAllAnimations()
         }
-        imagesArray = []
+        layer.speed = 1
+        layer.timeOffset = 0
+        layer.beginTime = 0
     }
     
     /// Temporarily pauses the animation. Restart the animation by calling `resumeAnimationAfterDelay(initialDelay:)`.
@@ -218,10 +219,7 @@ class KenBurnsView: UIView {
         shouldLoop = loop
 
         indexOfFirstImageShown = (randomize ? Int(arc4random_uniform(UInt32(imagesArray.count))) : 0)
-        nextImageIndex = indexOfFirstImageShown
-        
-        currentImageIndex = nextImageIndex
-        nextImageIndex = ((nextImageIndex + 1) % imagesArray.count)
+        currentImageIndex = indexOfFirstImageShown
 
         if let firstImage = currentImage {
             layer.speed = 1
@@ -231,20 +229,33 @@ class KenBurnsView: UIView {
     }
     
     func didAdvanceToNextImageIndex() -> Bool {
+        let nextImageIndex = ((currentImageIndex + 1) % imagesArray.count)
         if !shouldLoop && nextImageIndex == indexOfFirstImageShown {
             // Next image is the first image, which means we are done
             kenBurnsDelegate?.didFinishedAllImages(self, images: imagesArray)
             return false
         } else {
             currentImageIndex = nextImageIndex
-            nextImageIndex = ((nextImageIndex + 1) % imagesArray.count)
             kenBurnsDelegate?.didShowImage(self, image: currentImage!, atIndex: currentImageIndex)
             return true
         }
     }
     
-    func didAdvanceToPreviousImageIndex() -> Bool {
-        return false
+    func didAdvanceToPrevImageIndex() -> Bool {
+        if !shouldLoop && currentImageIndex == indexOfFirstImageShown {
+            return false
+        } else {
+            let prevImageIndex = ((currentImageIndex + imagesArray.count - 1) % imagesArray.count)
+            currentImageIndex = prevImageIndex
+            kenBurnsDelegate?.didShowImage(self, image: currentImage!, atIndex: currentImageIndex)
+            return true
+        }
+    }
+    
+    func restartAnimation() {
+        self.stopAnimation()
+        self.prepareAnimationsForImage(currentImage!)
+        self.startAnimationSequence()
     }
     
     func prepareAnimationsForImage(_ image: UIImage) {

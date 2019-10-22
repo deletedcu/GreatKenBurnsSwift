@@ -84,7 +84,9 @@ class KenBurnsViewController: UIViewController {
             currentMediaIndex = currentMediaIndex + 1
         }
         
-        updateUI(with: currentMedia)
+        if kenBurnsView.didAdvanceToNextImageIndex() {
+            kenBurnsView.restartAnimation()
+        }
     }
     
     private func playPreviousMedia() {
@@ -98,7 +100,17 @@ class KenBurnsViewController: UIViewController {
             currentMediaIndex = currentMediaIndex - 1
         }
         
-        updateUI(with: currentMedia)
+        if kenBurnsView.didAdvanceToPrevImageIndex() {
+            kenBurnsView.restartAnimation()
+        }
+    }
+    
+    private func toggleMedia(_ isPaused: Bool) {
+        if (isPaused) {
+            kenBurnsView.pauseAnimation()
+        } else {
+            kenBurnsView.resumeAnimation()
+        }
     }
     
     func downloadImage(url: URL, completion: @escaping (_ image: UIImage?, _ error: Error? ) -> Void) {
@@ -132,6 +144,10 @@ extension KenBurnsViewController: ControlsViewDelegate {
     func didTapNextButton() {
         playNextMedia()
     }
+    
+    func didPlayPauseButton(_ isPaused: Bool) {
+        toggleMedia(isPaused)
+    }
 }
 
 // Mark: - KenBurnsViewDelegate
@@ -139,6 +155,7 @@ extension KenBurnsViewController: KenBurnsViewDelegate {
     func didShowImage(_ kenBurnsView: KenBurnsView, image: UIImage, atIndex: Int) {
         let media = medias[atIndex]
         updateUI(with: media)
+        controlsView.isPaused = false
     }
     
     func didFinishedAllImages(_ kenBurnsView: KenBurnsView, images: Array<UIImage>) {

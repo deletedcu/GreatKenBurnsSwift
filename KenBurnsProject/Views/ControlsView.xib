@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +12,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="Y3g-bG-GgB" id="1l3-Dn-2h7"/>
                 <outlet property="titleLabel" destination="48Z-Tf-Nfd" id="sNs-Xb-ICQ"/>
+                <outlet property="toggleButton" destination="8Oq-BU-q3X" id="WcF-ka-1Bh"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -35,8 +37,8 @@
                         </label>
                     </subviews>
                 </stackView>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="88" translatesAutoresizingMaskIntoConstraints="NO" id="xdc-pb-wyz">
-                    <rect key="frame" x="159.5" y="132" width="176" height="44"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="xdc-pb-wyz">
+                    <rect key="frame" x="149.5" y="132" width="196" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wc-DT-aXo">
                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
@@ -50,8 +52,16 @@
                                 <action selector="didTapPreviousButton:" destination="-1" eventType="touchUpInside" id="bDH-LC-qHk"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Oq-BU-q3X">
+                            <rect key="frame" x="76" y="0.0" width="44" height="44"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="playpause" catalog="system"/>
+                            <connections>
+                                <action selector="didPlayPauseButton:" destination="-1" eventType="touchUpInside" id="rFt-e7-6WG"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D64-Zl-jda">
-                            <rect key="frame" x="132" y="0.0" width="44" height="44"/>
+                            <rect key="frame" x="152" y="0.0" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="gcf-5L-jQi"/>
                                 <constraint firstAttribute="height" constant="44" id="kgy-6V-ZcZ"/>
@@ -80,5 +90,6 @@
     <resources>
         <image name="backward.end" catalog="system" width="64" height="60"/>
         <image name="forward.end" catalog="system" width="64" height="60"/>
+        <image name="playpause" catalog="system" width="64" height="42"/>
     </resources>
 </document>
