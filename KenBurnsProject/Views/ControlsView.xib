@@ -10,7 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ControlsView" customModule="KenBurnsProject" customModuleProvider="target">
             <connections>
+                <outlet property="backwardButton" destination="4wc-DT-aXo" id="fau-kC-rbs"/>
                 <outlet property="descriptionLabel" destination="Y3g-bG-GgB" id="1l3-Dn-2h7"/>
+                <outlet property="forwardButton" destination="D64-Zl-jda" id="eGg-fe-EX1"/>
                 <outlet property="titleLabel" destination="48Z-Tf-Nfd" id="sNs-Xb-ICQ"/>
                 <outlet property="toggleButton" destination="8Oq-BU-q3X" id="WcF-ka-1Bh"/>
             </connections>
@@ -54,8 +56,12 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Oq-BU-q3X">
                             <rect key="frame" x="76" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="YBl-5d-wfi"/>
+                                <constraint firstAttribute="height" constant="44" id="sc9-UO-xqb"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="playpause" catalog="system"/>
+                            <state key="normal" image="pause" catalog="system"/>
                             <connections>
                                 <action selector="didPlayPauseButton:" destination="-1" eventType="touchUpInside" id="rFt-e7-6WG"/>
                             </connections>
@@ -90,6 +96,6 @@
     <resources>
         <image name="backward.end" catalog="system" width="64" height="60"/>
         <image name="forward.end" catalog="system" width="64" height="60"/>
-        <image name="playpause" catalog="system" width="64" height="42"/>
+        <image name="pause" catalog="system" width="44" height="64"/>
     </resources>
 </document>
