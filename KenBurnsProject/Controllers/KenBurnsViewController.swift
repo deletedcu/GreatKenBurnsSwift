@@ -13,6 +13,9 @@ class KenBurnsViewController: UIViewController {
     private var medias = [Media]()
     private var currentMediaIndex: Int!
     
+    let imageCache = NSCache<NSString, UIImage>()
+    var imagesArray = [UIImage]()
+    
     private var currentMedia: Media {
         medias[currentMediaIndex]
     }
@@ -30,10 +33,29 @@ class KenBurnsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        loadImages(self.medias, index: 0)
+    }
+    
+    func loadImages(_ data: [Media], index: Int) {
+        if index >= data.count { return }
         
-        
-        let images: [UIImage] = [UIImage(named: "1")!, UIImage(named: "2")!, UIImage(named: "3")!]
-        kenBurnsView.animateWithImages(images, imageAnimationDuration: 10, initialDelay: 0, shouldLoop: true)
+        let media = data[index]
+        self.downloadImage(url: URL(string: media.image)!) {[weak self] (image, err) in
+            guard let sself = self else { return }
+            if let image = image {
+                sself.imagesArray.append(image)
+                sself.kenBurnsView.addImage(image: image)
+            } else {
+                sself.imagesArray.append(UIImage(named: "1")!)
+                sself.kenBurnsView.addImage(image: UIImage(named: "1")!)
+            }
+            
+            if index == 0 {
+                sself.kenBurnsView.animateWithImages(sself.imagesArray, imageAnimationDuration: 10, initialDelay: 0, shouldLoop: true)
+            }
+            
+            sself.loadImages(data, index: index + 1)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -78,6 +100,26 @@ class KenBurnsViewController: UIViewController {
         
         updateUI(with: currentMedia)
     }
+    
+    func downloadImage(url: URL, completion: @escaping (_ image: UIImage?, _ error: Error? ) -> Void) {
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+            completion(cachedImage, nil)
+        } else {
+            URLSession.shared.dataTask(with: url, completionHandler: {data, response, error in
+                if let error = error {
+                    completion(nil, error)
+                } else if let data = data {
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: data)!
+                        self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
+                        completion(image, nil)
+                    }
+                } else {
+                    completion(nil, error)
+                }
+            }).resume()
+        }
+    }
 }
 
 // MARK: - ControlsViewDelegate
@@ -95,7 +137,8 @@ extension KenBurnsViewController: ControlsViewDelegate {
 // Mark: - KenBurnsViewDelegate
 extension KenBurnsViewController: KenBurnsViewDelegate {
     func didShowImage(_ kenBurnsView: KenBurnsView, image: UIImage, atIndex: Int) {
-        
+        let media = medias[atIndex]
+        updateUI(with: media)
     }
     
     func didFinishedAllImages(_ kenBurnsView: KenBurnsView, images: Array<UIImage>) {
