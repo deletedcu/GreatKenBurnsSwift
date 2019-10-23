@@ -124,7 +124,6 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
     public var pansAcross = false
     public var zoomIntensity = 1.0
     public var durationRange: DurationRange = (min: 10, max: 20)
-    public var isFirstRun = false
 
     public var isAnimating: Bool {
         return !animations.isEmpty
@@ -258,8 +257,10 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
     }
 
     func willFadeOutAnimation(_ animation: KenBurnsAnimation) {
-        swapCurrentAndNext()
-        startNewAnimation()
+        if loops {
+            swapCurrentAndNext()
+            startNewAnimation()
+        }
     }
 
     func swapCurrentAndNext() {

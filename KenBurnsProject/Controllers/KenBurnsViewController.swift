@@ -31,11 +31,6 @@ class KenBurnsViewController: UIViewController {
         updateUI(with: currentMedia)
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        updateUI(with: currentMedia)
-//    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         kenBurnsImageView.stopAnimating()
         super.viewDidDisappear(animated)
@@ -52,8 +47,8 @@ class KenBurnsViewController: UIViewController {
         kenBurnsImageView.stopAnimating()
         kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage(named: "placeholder"))
         kenBurnsImageView.zoomIntensity = 1.2
+        kenBurnsImageView.loops = true
         kenBurnsImageView.setDuration(min: 6, max: 10)
-        kenBurnsImageView.isFirstRun = true
         kenBurnsImageView.startAnimating()
     }
     

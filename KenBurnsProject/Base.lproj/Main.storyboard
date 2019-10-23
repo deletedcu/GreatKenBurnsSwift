@@ -46,8 +46,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-u4-qgd" customClass="KenBurnsImageView" customModule="KenBurnsProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="900"/>
+                            <view contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-u4-qgd" customClass="KenBurnsImageView" customModule="KenBurnsProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1600" height="900"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0l-Cc-EcE" customClass="ControlsView" customModule="KenBurnsProject" customModuleProvider="target">
