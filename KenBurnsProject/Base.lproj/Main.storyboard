@@ -46,7 +46,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-u4-qgd" customClass="KenBurnsView" customModule="KenBurnsProject">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-u4-qgd" customClass="KenBurnsImageView" customModule="KenBurnsProject" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="1200" height="900"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </view>
@@ -68,7 +68,7 @@
                     </view>
                     <connections>
                         <outlet property="controlsView" destination="d0l-Cc-EcE" id="zlg-Fi-iHW"/>
-                        <outlet property="kenBurnsView" destination="mh5-u4-qgd" id="U1U-tn-7cb"/>
+                        <outlet property="kenBurnsImageView" destination="mh5-u4-qgd" id="Jtw-lo-wCd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRQ-Rl-yBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

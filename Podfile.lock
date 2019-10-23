@@ -1,0 +1,22 @@
+PODS:
+  - CalmParametricAnimations (1.0.1)
+  - SDWebImage (5.2.3):
+    - SDWebImage/Core (= 5.2.3)
+  - SDWebImage/Core (5.2.3)
+
+DEPENDENCIES:
+  - CalmParametricAnimations
+  - SDWebImage
+
+SPEC REPOS:
+  trunk:
+    - CalmParametricAnimations
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  CalmParametricAnimations: 8747c67d71e07be5e5b3b9d524560d1fbe74be94
+  SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
+
+PODFILE CHECKSUM: 8a0f3e8d8e102ea487cfe241369db87ff3dc4829
+
+COCOAPODS: 1.8.3

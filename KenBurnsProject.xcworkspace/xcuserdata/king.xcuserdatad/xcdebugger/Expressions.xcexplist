@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "KenBurnsImageView.startAnimating():KenBurns.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isAnimating">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "KenBurnsAnimation.callCompletionIfNecessary():KenBurns.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "timeRemaining">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "KenBurnsImageView.startNewAnimation():KenBurns.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isFirstRun">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "KenBurnsImageView.stopAnimating():KenBurns.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isAnimating">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
