@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ViewController: UIViewController {
     
@@ -24,6 +25,24 @@ class ViewController: UIViewController {
         case .showKenBurns:
             let kenBurnsVC = segue.destination as! KenBurnsViewController
             kenBurnsVC.inject(medias: medias, currentMediaIndex: 0)
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        preloadIImage(data: self.medias, index: 0)
+    }
+    
+    private func preloadIImage(data: [Media], index: Int) {
+        NSLog("preloadImage index %d", index)
+        if index >= data.count {
+            return
+        }
+        let media = data[index]
+        SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, data, err, cacheType, isFinished, url) in
+            guard let sself = self else { return }
+            sself.preloadIImage(data: sself.medias, index: index + 1)
         }
     }
 }

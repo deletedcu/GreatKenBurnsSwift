@@ -45,7 +45,7 @@ class KenBurnsViewController: UIViewController {
         controlsView.configure(title: media.title, description: media.description)
         controlsView.isPaused = false
         kenBurnsImageView.stopAnimating()
-        kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage(named: "placeholder"))
+        kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage())
         kenBurnsImageView.zoomIntensity = 1.2
         kenBurnsImageView.loops = true
         kenBurnsImageView.setDuration(min: 6, max: 10)
