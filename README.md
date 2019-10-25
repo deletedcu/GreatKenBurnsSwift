@@ -44,10 +44,3 @@ func newKenBurnsImageView(image: UIImage) -> KenBurnsImageView {
 
 Due to unfortunate circumstances, Calm has no direct affiliation with [Ken Burns](https://en.wikipedia.org/wiki/Ken_Burns) himself 😞
 
-### Installation
-
-KenBurns is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
-
-```ruby
-pod "KenBurns"
-```
