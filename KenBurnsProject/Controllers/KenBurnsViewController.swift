@@ -58,10 +58,10 @@ class KenBurnsViewController: UIViewController {
         controlsView.isPaused = false
         kenBurnsImageView.stopAnimating()
         kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage())
-        kenBurnsImageView.zoomIntensity = 1.5
+        kenBurnsImageView.zoomIntensity = 0.5
         kenBurnsImageView.loops = true
         kenBurnsImageView.pansAcross = true
-        kenBurnsImageView.setDuration(min: 10, max: 20)
+        kenBurnsImageView.setDuration(min: 20, max: 20)
         kenBurnsImageView.startAnimating()
     }
     
@@ -125,7 +125,11 @@ class KenBurnsViewController: UIViewController {
     
     // Preload previous images when click backward button
     private func preloadPrevImages() {
-        if self.medias.count > self.pageSize && self.currentMediaIndex < self.lastPrevIndex + 3 && self.lastPrevIndex > self.lastNextIndex {
+        if self.medias.count > self.pageSize &&
+            self.currentMediaIndex < self.lastPrevIndex + 3 &&
+            self.currentMediaIndex > self.lastNextIndex &&
+            self.lastPrevIndex > self.lastNextIndex {
+            
             if self.lastPrevIndex - self.pageSize > 0 {
                 prevData = Array(self.medias[self.lastPrevIndex - self.pageSize ..< self.lastPrevIndex])
                 self.lastPrevIndex -= self.pageSize
