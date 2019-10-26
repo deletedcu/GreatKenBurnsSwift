@@ -13,7 +13,15 @@ class KenBurnsViewController: UIViewController {
     
     private var medias = [Media]()
     private var tempData = [Media]()
-    private var currentMediaIndex: Int! = 0
+    private var currentMediaIndex: Int! = 0 {
+        didSet {
+            if controlsView != nil {
+                controlsView.backwardButton.isEnabled = isLoadAll ? true : currentMediaIndex > 0
+            }
+        }
+    }
+    
+    private var isLoadAll: Bool! = false
     
     // Pre-fetch image values
     private var lastIndex: Int! = 5
@@ -103,6 +111,7 @@ class KenBurnsViewController: UIViewController {
             } else {
                 tempData = Array(self.medias[self.lastIndex ..< self.medias.count])
                 self.lastIndex = self.medias.count
+                self.isLoadAll = true
             }
             NSLog("preloadImages lastIndex: %d", self.lastIndex)
             self.preloadImage(data: tempData, index: 0)

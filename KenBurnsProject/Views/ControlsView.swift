@@ -16,7 +16,7 @@ class ControlsView: UIView, NibOwnerLoadable {
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var backwardButton: UIButton!
+    @IBOutlet public weak var backwardButton: UIButton!
     @IBOutlet private weak var forwardButton: UIButton!
     @IBOutlet private weak var toggleButton: UIButton!
     
@@ -56,6 +56,7 @@ class ControlsView: UIView, NibOwnerLoadable {
             forwardButton.setImage(UIImage(named: "icon-forward"), for: .normal)
             toggleButton.setImage(UIImage(named: "icon-pause"), for: .normal)
         }
+        backwardButton.isEnabled = false
     }
     
     func configure(title: String, description: String) {
