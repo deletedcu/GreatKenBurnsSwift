@@ -12,19 +12,15 @@ class KenBurnsViewController: UIViewController {
     @IBOutlet weak var kenBurnsImageView: KenBurnsImageView!
     
     private var medias = [Media]()
-    private var tempData = [Media]()
-    private var currentMediaIndex: Int! = 0 {
-        didSet {
-            if controlsView != nil {
-                controlsView.backwardButton.isEnabled = isLoadAll ? true : currentMediaIndex > 0
-            }
-        }
-    }
+    private var nextData = [Media]()
+    private var prevData = [Media]()
+    private var currentMediaIndex: Int! = 0
     
     private var isLoadAll: Bool! = false
     
     // Pre-fetch image values
-    private var lastIndex: Int! = 5
+    private var lastNextIndex: Int! = 5
+    private var lastPrevIndex: Int! = 0
     private let pageSize: Int! = 5
     
     let imageCache = NSCache<NSString, UIImage>()
@@ -51,6 +47,9 @@ class KenBurnsViewController: UIViewController {
 
     func inject(medias: [Media], currentMediaIndex: Int) {
         self.medias = medias
+        if self.medias.count > pageSize {
+            self.lastPrevIndex = self.medias.count - pageSize
+        }
         self.currentMediaIndex = currentMediaIndex
     }
     
@@ -78,7 +77,7 @@ class KenBurnsViewController: UIViewController {
         }
         
         updateUI(with: currentMedia)
-        preloadImages()
+        preloadNextImages()
     }
     
     private func playPreviousMedia() {
@@ -93,6 +92,7 @@ class KenBurnsViewController: UIViewController {
         }
         
         updateUI(with: currentMedia)
+        preloadPrevImages()
     }
     
     private func toggleMedia(_ isPaused: Bool) {
@@ -103,30 +103,56 @@ class KenBurnsViewController: UIViewController {
         }
     }
     
-    private func preloadImages() {
-        if self.medias.count > self.lastIndex && self.currentMediaIndex >= self.lastIndex - 3 {
-            if self.medias.count > self.lastIndex + self.pageSize {
-                tempData = Array(self.medias[self.lastIndex ..< self.lastIndex + self.pageSize])
-                self.lastIndex += self.pageSize
+    // Preload next images when click forward button
+    private func preloadNextImages() {
+        if self.medias.count > self.lastNextIndex &&
+            self.currentMediaIndex >= self.lastNextIndex - 3 &&
+            self.currentMediaIndex < self.lastPrevIndex &&
+            self.lastPrevIndex > self.lastNextIndex {
+            
+            if self.medias.count > self.lastNextIndex + self.pageSize {
+                nextData = Array(self.medias[self.lastNextIndex ..< self.lastNextIndex + self.pageSize])
+                self.lastNextIndex += self.pageSize
             } else {
-                tempData = Array(self.medias[self.lastIndex ..< self.medias.count])
-                self.lastIndex = self.medias.count
+                nextData = Array(self.medias[self.lastNextIndex ..< self.medias.count])
+                self.lastNextIndex = self.medias.count
                 self.isLoadAll = true
             }
-            NSLog("preloadImages lastIndex: %d", self.lastIndex)
-            self.preloadImage(data: tempData, index: 0)
+            NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
+            self.preloadImage(data: nextData, index: 0, isNext: true)
         }
     }
     
-    private func preloadImage(data: [Media], index: Int) {
-        if index >= data.count {
+    // Preload previous images when click backward button
+    private func preloadPrevImages() {
+        if self.medias.count > self.pageSize && self.currentMediaIndex < self.lastPrevIndex + 3 && self.lastPrevIndex > self.lastNextIndex {
+            if self.lastPrevIndex - self.pageSize > 0 {
+                prevData = Array(self.medias[self.lastPrevIndex - self.pageSize ..< self.lastPrevIndex])
+                self.lastPrevIndex -= self.pageSize
+            } else {
+                prevData = Array(self.medias[0 ..< self.lastPrevIndex])
+                self.lastPrevIndex = 0
+            }
+            NSLog("preloadPrevImages lastIndex: %d", self.lastPrevIndex)
+            self.preloadImage(data: prevData, index: prevData.count - 1,isNext: false)
+        }
+    }
+    
+    
+    // Preload image while loop
+    private func preloadImage(data: [Media], index: Int, isNext: Bool) {
+        if index >= data.count || index < 0 {
             return
         }
         NSLog("preloadImage index: %d", index)
         let media = data[index]
-        SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, data, err, cacheType, isFinished, url) in
+        SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, d, err, cacheType, isFinished, url) in
             guard let sself = self else { return }
-            sself.preloadImage(data: sself.tempData, index: index + 1)
+            if isNext {
+                sself.preloadImage(data: data, index: index + 1, isNext: isNext)
+            } else {
+                sself.preloadImage(data: data, index: index - 1, isNext: isNext)
+            }
         }
     }
     

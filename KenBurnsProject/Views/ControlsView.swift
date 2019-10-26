@@ -56,7 +56,6 @@ class ControlsView: UIView, NibOwnerLoadable {
             forwardButton.setImage(UIImage(named: "icon-forward"), for: .normal)
             toggleButton.setImage(UIImage(named: "icon-pause"), for: .normal)
         }
-        backwardButton.isEnabled = false
     }
     
     func configure(title: String, description: String) {

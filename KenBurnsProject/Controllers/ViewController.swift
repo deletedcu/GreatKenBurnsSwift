@@ -31,9 +31,20 @@ class ViewController: UIViewController {
         Media(title: "16", description: "The 16 media.", image: "http://hdwpro.com/wp-content/uploads/2018/07/Awesome-Landscape-Wallpaper.jpg"),
         Media(title: "17", description: "The 17 media.", image: "http://hdwpro.com/wp-content/uploads/2019/10/Natural-Ultra-HD-Wallpaper.jpg"),
         Media(title: "18", description: "The 18 media.", image: "http://hdwpro.com/wp-content/uploads/2019/09/Cool-Lake-Wallpaper.jpg"),
-        Media(title: "19", description: "The 19 media.", image: "http://hdwpro.com/wp-content/uploads/2019/10/Natural-Ultra-HD-Wallpaper.jpg")]
+        Media(title: "19", description: "The 19 media.", image: "http://hdwpro.com/wp-content/uploads/2019/10/Natural-Ultra-HD-Wallpaper.jpg"),
+        Media(title: "20", description: "The 20 media.", image: "http://hdwpro.com/wp-content/uploads/2018/07/Awesome-Landscape-Wallpaper.jpg"),
+        Media(title: "21", description: "The 21 media.", image: "http://hdwpro.com/wp-content/uploads/2019/10/Natural-Ultra-HD-Wallpaper.jpg"),
+        Media(title: "22", description: "The 22 media.", image: "http://hdwpro.com/wp-content/uploads/2019/09/Cool-Lake-Wallpaper.jpg"),
+        Media(title: "23", description: "The 23 media.", image: "http://hdwpro.com/wp-content/uploads/2018/07/Awesome-Landscape-Wallpaper.jpg"),
+        Media(title: "24", description: "The 24 media.", image: "http://hdwpro.com/wp-content/uploads/2019/10/Natural-Ultra-HD-Wallpaper.jpg"),
+        Media(title: "25", description: "The 25 media.", image: "http://hdwpro.com/wp-content/uploads/2019/09/Cool-Lake-Wallpaper.jpg"),
+        Media(title: "26", description: "The 26 media.", image: "http://hdwpro.com/wp-content/uploads/2018/07/Awesome-Landscape-Wallpaper.jpg"),
+        Media(title: "27", description: "The 27 media.", image: "http://hdwpro.com/wp-content/uploads/2019/10/Natural-Ultra-HD-Wallpaper.jpg"),
+        Media(title: "28", description: "The 28 media.", image: "http://hdwpro.com/wp-content/uploads/2019/09/Cool-Lake-Wallpaper.jpg"),
+        Media(title: "29", description: "The 29 media.", image: "http://hdwpro.com/wp-content/uploads/2019/10/Natural-Ultra-HD-Wallpaper.jpg")]
     
-    private var data = [Media]()
+    private var nextData = [Media]()
+    private var prevData = [Media]()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier.flatMap(SegueIdentifier.init) else {
@@ -50,24 +61,36 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Pre fetching next 5 images
         if (self.medias.count >= 5) {
-            data = Array(self.medias[0 ..< 5])
+            nextData = Array(self.medias[0 ..< 5])
         } else {
-            data = self.medias
+            nextData = self.medias
         }
-        NSLog("data count %d", data.count)
-        preloadImage(data: data, index: 0)
+        NSLog("data count %d", nextData.count)
+        preloadImage(data: nextData, index: 0, isNext: true)
+        
+        // Pre fetching previous 5 images
+        if (self.medias.count >= 5) {
+            prevData = Array(self.medias[self.medias.count - 5 ..< self.medias.count])
+            preloadImage(data: prevData, index: 4, isNext: false)
+        }
     }
     
-    private func preloadImage(data: [Media], index: Int) {
-        if index >= data.count {
+    private func preloadImage(data: [Media], index: Int, isNext: Bool) {
+        if index >= data.count || index < 0 {
             return
         }
         NSLog("preloadImage index %d", index)
         let media = data[index]
-        SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, data, err, cacheType, isFinished, url) in
+        SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, d, err, cacheType, isFinished, url) in
             guard let sself = self else { return }
-            sself.preloadImage(data: sself.data, index: index + 1)
+            if isNext {
+                sself.preloadImage(data: data, index: index + 1, isNext: isNext)
+            } else {
+                sself.preloadImage(data: data, index: index - 1, isNext: isNext)
+            }
+            
         }
     }
 }
