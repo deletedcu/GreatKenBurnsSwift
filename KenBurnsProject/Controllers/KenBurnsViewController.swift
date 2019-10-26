@@ -58,7 +58,7 @@ class KenBurnsViewController: UIViewController {
         controlsView.isPaused = false
         kenBurnsImageView.stopAnimating()
         kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage())
-        kenBurnsImageView.zoomIntensity = 0.5
+        kenBurnsImageView.zoomIntensity = 1.5
         kenBurnsImageView.loops = true
         kenBurnsImageView.pansAcross = true
         kenBurnsImageView.setDuration(min: 20, max: 20)
@@ -148,7 +148,6 @@ class KenBurnsViewController: UIViewController {
         if index >= data.count || index < 0 {
             return
         }
-        NSLog("preloadImage index: %d", index)
         let media = data[index]
         SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, d, err, cacheType, isFinished, url) in
             guard let sself = self else { return }

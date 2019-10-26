@@ -67,7 +67,7 @@ class KenBurnsAnimation : Equatable {
     }
 
     var progressCurved: Double {
-        return kParametricTimeBlockAppleOut(progress)
+        return kParametricTimeBlockLinear(progress)
     }
 
     var currentZoom: Double {
