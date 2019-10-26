@@ -254,12 +254,10 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
     }
 
     func didFinishAnimation(_ animation: KenBurnsAnimation) {
-        NSLog("didFinishAnimation")
         animations.remove(animation)
     }
 
     func willFadeOutAnimation(_ animation: KenBurnsAnimation) {
-        NSLog("willFadeOutAnimation")
         if loops {
             swapCurrentAndNext()
             startNewAnimation()

@@ -59,10 +59,10 @@ class KenBurnsViewController: UIViewController {
         controlsView.isPaused = false
         kenBurnsImageView.stopAnimating()
         kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage())
-        kenBurnsImageView.zoomIntensity = 1.2
+        kenBurnsImageView.zoomIntensity = 1.5
         kenBurnsImageView.loops = true
         kenBurnsImageView.pansAcross = true
-        kenBurnsImageView.setDuration(min: 6, max: 10)
+        kenBurnsImageView.setDuration(min: 10, max: 20)
         kenBurnsImageView.startAnimating()
     }
     
