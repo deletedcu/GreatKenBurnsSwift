@@ -180,7 +180,7 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
 
     public func fetchImage(_ url: URL, placeholder: UIImage?) {
         [ currentImageView, nextImageView ].forEach {
-            $0.sd_setImage(with: url, placeholderImage: placeholder)
+            $0.sd_setImageWithFadeAlways(with: url, placeholderImage: placeholder)
         }
     }
 
@@ -204,6 +204,7 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
         updatesDisplayLink.isPaused = false
         timeAtPause = 0
         startNewAnimation()
+        bringSubviewToFront(currentImageView)
     }
 
     public func stopAnimating() {
@@ -253,10 +254,12 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
     }
 
     func didFinishAnimation(_ animation: KenBurnsAnimation) {
+        NSLog("didFinishAnimation")
         animations.remove(animation)
     }
 
     func willFadeOutAnimation(_ animation: KenBurnsAnimation) {
+        NSLog("willFadeOutAnimation")
         if loops {
             swapCurrentAndNext()
             startNewAnimation()

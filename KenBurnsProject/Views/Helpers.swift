@@ -121,3 +121,21 @@ class Random {
         return Int(arc4random_uniform(range)) + min
     }
 }
+
+extension UIImageView {
+    /// Adds image fade animation support for SDWebImage.
+    ///
+    /// The image always fades in regardless if it is already in the cache.
+    func sd_setImageWithFadeAlways(with url: URL?, placeholderImage placeholder: UIImage? = nil) {
+        self.sd_setImage(with: url) { image, _, _, _ in
+            if let image = image {
+                UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                    self.image = image
+                }, completion: nil)
+            } else {
+                // Error - use placeholder.
+                self.image = placeholder
+            }
+        }
+    }
+}

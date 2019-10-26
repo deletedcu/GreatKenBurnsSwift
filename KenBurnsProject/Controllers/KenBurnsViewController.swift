@@ -12,7 +12,12 @@ class KenBurnsViewController: UIViewController {
     @IBOutlet weak var kenBurnsImageView: KenBurnsImageView!
     
     private var medias = [Media]()
+    private var tempData = [Media]()
     private var currentMediaIndex: Int! = 0
+    
+    // Pre-fetch image values
+    private var lastIndex: Int! = 5
+    private let pageSize: Int! = 5
     
     let imageCache = NSCache<NSString, UIImage>()
     var imagesArray = [UIImage]()
@@ -48,6 +53,7 @@ class KenBurnsViewController: UIViewController {
         kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage())
         kenBurnsImageView.zoomIntensity = 1.2
         kenBurnsImageView.loops = true
+        kenBurnsImageView.pansAcross = true
         kenBurnsImageView.setDuration(min: 6, max: 10)
         kenBurnsImageView.startAnimating()
     }
@@ -64,6 +70,7 @@ class KenBurnsViewController: UIViewController {
         }
         
         updateUI(with: currentMedia)
+        preloadImages()
     }
     
     private func playPreviousMedia() {
@@ -85,6 +92,32 @@ class KenBurnsViewController: UIViewController {
             kenBurnsImageView.pause()
         } else {
             kenBurnsImageView.resume()
+        }
+    }
+    
+    private func preloadImages() {
+        if self.medias.count > self.lastIndex && self.currentMediaIndex >= self.lastIndex - 3 {
+            if self.medias.count > self.lastIndex + self.pageSize {
+                tempData = Array(self.medias[self.lastIndex ..< self.lastIndex + self.pageSize])
+                self.lastIndex += self.pageSize
+            } else {
+                tempData = Array(self.medias[self.lastIndex ..< self.medias.count])
+                self.lastIndex = self.medias.count
+            }
+            NSLog("preloadImages lastIndex: %d", self.lastIndex)
+            self.preloadImage(data: tempData, index: 0)
+        }
+    }
+    
+    private func preloadImage(data: [Media], index: Int) {
+        if index >= data.count {
+            return
+        }
+        NSLog("preloadImage index: %d", index)
+        let media = data[index]
+        SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, data, err, cacheType, isFinished, url) in
+            guard let sself = self else { return }
+            sself.preloadImage(data: sself.tempData, index: index + 1)
         }
     }
     
