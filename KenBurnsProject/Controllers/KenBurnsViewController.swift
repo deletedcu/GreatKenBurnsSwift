@@ -16,8 +16,6 @@ class KenBurnsViewController: UIViewController {
     private var prevData = [Media]()
     private var currentMediaIndex: Int! = 0
     
-    private var isLoadAll: Bool! = false
-    
     // Pre-fetch image values
     private var lastNextIndex: Int! = 0
     private var lastPrevIndex: Int! = 0
@@ -116,16 +114,26 @@ class KenBurnsViewController: UIViewController {
                 self.currentMediaIndex < self.lastPrevIndex &&
                 self.lastPrevIndex > self.lastNextIndex {
                 
+                var urls = [URL]()
                 if self.medias.count > self.lastNextIndex + self.pageSize {
-                    self.nextData = Array(self.medias[self.lastNextIndex ..< self.lastNextIndex + self.pageSize])
+                    let data = Array(self.medias[self.lastNextIndex ..< self.lastNextIndex + self.pageSize])
+                    data.forEach { (media) in
+                        if let url = URL(string: media.image) {
+                            urls.append(url)
+                        }
+                    }
                     self.lastNextIndex += self.pageSize
                 } else {
-                    self.nextData = Array(self.medias[self.lastNextIndex ..< self.medias.count])
+                    let data = Array(self.medias[self.lastNextIndex ..< self.medias.count])
+                    data.forEach { (media) in
+                        if let url = URL(string: media.image) {
+                            urls.append(url)
+                        }
+                    }
                     self.lastNextIndex = self.medias.count
-                    self.isLoadAll = true
                 }
                 NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
-                self.preloadImage(data: self.nextData, index: 0, isNext: true)
+                SDWebImagePrefetcher.shared.prefetchURLs(urls)
             }
         }
     }
@@ -138,32 +146,26 @@ class KenBurnsViewController: UIViewController {
                 self.currentMediaIndex > self.lastNextIndex &&
                 self.lastPrevIndex > self.lastNextIndex {
                 
+                var urls = [URL]()
                 if self.lastPrevIndex - self.pageSize > 0 {
-                    self.prevData = Array(self.medias[self.lastPrevIndex - self.pageSize ..< self.lastPrevIndex])
+                    let data = Array(self.medias[self.lastPrevIndex - self.pageSize ..< self.lastPrevIndex])
+                    data.forEach { (media) in
+                        if let url = URL(string: media.image) {
+                            urls.append(url)
+                        }
+                    }
                     self.lastPrevIndex -= self.pageSize
                 } else {
-                    self.prevData = Array(self.medias[0 ..< self.lastPrevIndex])
+                    let data = Array(self.medias[0 ..< self.lastPrevIndex])
+                    data.forEach { (media) in
+                        if let url = URL(string: media.image) {
+                            urls.append(url)
+                        }
+                    }
                     self.lastPrevIndex = 0
                 }
                 NSLog("preloadPrevImages lastIndex: %d", self.lastPrevIndex)
-                self.preloadImage(data: self.prevData, index: self.prevData.count - 1, isNext: false)
-            }
-        }
-    }
-    
-    
-    // Preload image while loop
-    private func preloadImage(data: [Media], index: Int, isNext: Bool) {
-        if index >= data.count || index < 0 {
-            return
-        }
-        let media = data[index]
-        SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, d, err, cacheType, isFinished, url) in
-            guard let sself = self else { return }
-            if isNext {
-                sself.preloadImage(data: data, index: index + 1, isNext: isNext)
-            } else {
-                sself.preloadImage(data: data, index: index - 1, isNext: isNext)
+                SDWebImagePrefetcher.shared.prefetchURLs(urls)
             }
         }
     }
