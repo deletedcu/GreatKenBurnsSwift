@@ -57,39 +57,5 @@ class ViewController: UIViewController {
             kenBurnsVC.inject(medias: medias, currentMediaIndex: 0)
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Pre fetching next 5 images
-        if (self.medias.count >= 5) {
-            nextData = Array(self.medias[0 ..< 5])
-        } else {
-            nextData = self.medias
-        }
-        preloadImage(data: nextData, index: 0, isNext: true)
-        
-        // Pre fetching previous 5 images
-        if (self.medias.count >= 5) {
-            prevData = Array(self.medias[self.medias.count - 5 ..< self.medias.count])
-            preloadImage(data: prevData, index: 4, isNext: false)
-        }
-    }
-    
-    private func preloadImage(data: [Media], index: Int, isNext: Bool) {
-        if index >= data.count || index < 0 {
-            return
-        }
-        let media = data[index]
-        SDWebImageManager.shared.loadImage(with: URL(string: media.image)!, options: .highPriority, progress: nil) {[weak self] (image, d, err, cacheType, isFinished, url) in
-            guard let sself = self else { return }
-            if isNext {
-                sself.preloadImage(data: data, index: index + 1, isNext: isNext)
-            } else {
-                sself.preloadImage(data: data, index: index - 1, isNext: isNext)
-            }
-            
-        }
-    }
 }
 

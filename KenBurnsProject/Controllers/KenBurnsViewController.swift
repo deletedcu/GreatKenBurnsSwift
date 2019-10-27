@@ -19,7 +19,7 @@ class KenBurnsViewController: UIViewController {
     private var isLoadAll: Bool! = false
     
     // Pre-fetch image values
-    private var lastNextIndex: Int! = 5
+    private var lastNextIndex: Int! = 0
     private var lastPrevIndex: Int! = 0
     private let pageSize: Int! = 5
     
@@ -32,11 +32,15 @@ class KenBurnsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSLog("viewDidLoad")
         controlsView.delegate = self
+        preloadNextImages()
+        preloadPrevImages()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        NSLog("viewDidAppear")
         updateUI(with: currentMedia)
     }
     
@@ -46,6 +50,7 @@ class KenBurnsViewController: UIViewController {
     }
 
     func inject(medias: [Media], currentMediaIndex: Int) {
+        NSLog("inject")
         self.medias = medias
         if self.medias.count > pageSize {
             self.lastPrevIndex = self.medias.count - pageSize
@@ -58,7 +63,7 @@ class KenBurnsViewController: UIViewController {
         controlsView.isPaused = false
         kenBurnsImageView.stopAnimating()
         kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage())
-        kenBurnsImageView.zoomIntensity = 1.5
+        kenBurnsImageView.zoomIntensity = 0.2
         kenBurnsImageView.loops = true
         kenBurnsImageView.pansAcross = true
         kenBurnsImageView.setDuration(min: 20, max: 20)

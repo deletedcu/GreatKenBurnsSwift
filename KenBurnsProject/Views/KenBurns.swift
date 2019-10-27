@@ -39,9 +39,10 @@ class KenBurnsAnimation : Equatable {
         duration = Random.double(durationRange.min, durationRange.max)
         startTime = CACurrentMediaTime()
 
-        let zoomMin = 1 + (0.3 * zoomIntensity)
-        let zoomMax = 1 + (1.4 * zoomIntensity)
-        zoom = Random.double(zoomMin, zoomMax)
+//        let zoomMin = 1 + (0.3 * zoomIntensity)
+//        let zoomMax = 1 + (1.4 * zoomIntensity)
+//        zoom = Random.double(zoomMin, zoomMax)
+        zoom = 1 + zoomIntensity
 
         /* zooms to within maximal square within bounds that won't expose the edge of the image */
         let range = (min: (1 - zoom), max: 0.0)
