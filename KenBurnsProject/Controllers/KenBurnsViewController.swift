@@ -63,7 +63,7 @@ class KenBurnsViewController: UIViewController {
         controlsView.isPaused = false
         kenBurnsImageView.stopAnimating()
         kenBurnsImageView.fetchImage(URL(string: media.image)!, placeholder: UIImage())
-        kenBurnsImageView.zoomIntensity = 0.2
+        kenBurnsImageView.zoomIntensity = 1.5
         kenBurnsImageView.loops = true
         kenBurnsImageView.pansAcross = true
         kenBurnsImageView.setDuration(min: 20, max: 20)
@@ -110,40 +110,44 @@ class KenBurnsViewController: UIViewController {
     
     // Preload next images when click forward button
     private func preloadNextImages() {
-        if self.medias.count > self.lastNextIndex &&
-            self.currentMediaIndex >= self.lastNextIndex - 3 &&
-            self.currentMediaIndex < self.lastPrevIndex &&
-            self.lastPrevIndex > self.lastNextIndex {
-            
-            if self.medias.count > self.lastNextIndex + self.pageSize {
-                nextData = Array(self.medias[self.lastNextIndex ..< self.lastNextIndex + self.pageSize])
-                self.lastNextIndex += self.pageSize
-            } else {
-                nextData = Array(self.medias[self.lastNextIndex ..< self.medias.count])
-                self.lastNextIndex = self.medias.count
-                self.isLoadAll = true
+        DispatchQueue.global(qos: .background).async {
+            if self.medias.count > self.lastNextIndex &&
+                self.currentMediaIndex >= self.lastNextIndex - 3 &&
+                self.currentMediaIndex < self.lastPrevIndex &&
+                self.lastPrevIndex > self.lastNextIndex {
+                
+                if self.medias.count > self.lastNextIndex + self.pageSize {
+                    self.nextData = Array(self.medias[self.lastNextIndex ..< self.lastNextIndex + self.pageSize])
+                    self.lastNextIndex += self.pageSize
+                } else {
+                    self.nextData = Array(self.medias[self.lastNextIndex ..< self.medias.count])
+                    self.lastNextIndex = self.medias.count
+                    self.isLoadAll = true
+                }
+                NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
+                self.preloadImage(data: self.nextData, index: 0, isNext: true)
             }
-            NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
-            self.preloadImage(data: nextData, index: 0, isNext: true)
         }
     }
     
     // Preload previous images when click backward button
     private func preloadPrevImages() {
-        if self.medias.count > self.pageSize &&
-            self.currentMediaIndex < self.lastPrevIndex + 3 &&
-            self.currentMediaIndex > self.lastNextIndex &&
-            self.lastPrevIndex > self.lastNextIndex {
-            
-            if self.lastPrevIndex - self.pageSize > 0 {
-                prevData = Array(self.medias[self.lastPrevIndex - self.pageSize ..< self.lastPrevIndex])
-                self.lastPrevIndex -= self.pageSize
-            } else {
-                prevData = Array(self.medias[0 ..< self.lastPrevIndex])
-                self.lastPrevIndex = 0
+        DispatchQueue.global(qos: .background).async {
+            if self.medias.count > self.pageSize &&
+                self.currentMediaIndex < self.lastPrevIndex + 3 &&
+                self.currentMediaIndex > self.lastNextIndex &&
+                self.lastPrevIndex > self.lastNextIndex {
+                
+                if self.lastPrevIndex - self.pageSize > 0 {
+                    self.prevData = Array(self.medias[self.lastPrevIndex - self.pageSize ..< self.lastPrevIndex])
+                    self.lastPrevIndex -= self.pageSize
+                } else {
+                    self.prevData = Array(self.medias[0 ..< self.lastPrevIndex])
+                    self.lastPrevIndex = 0
+                }
+                NSLog("preloadPrevImages lastIndex: %d", self.lastPrevIndex)
+                self.preloadImage(data: self.prevData, index: self.prevData.count - 1, isNext: false)
             }
-            NSLog("preloadPrevImages lastIndex: %d", self.lastPrevIndex)
-            self.preloadImage(data: prevData, index: prevData.count - 1,isNext: false)
         }
     }
     
