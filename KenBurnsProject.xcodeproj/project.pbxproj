@@ -18,6 +18,8 @@
 		1897B7F6235EA1F900D737D3 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1897B7F5235EA1F900D737D3 /* ControlsView.swift */; };
 		1897B7F9235EA21700D737D3 /* ControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1897B7F8235EA21700D737D3 /* ControlsView.xib */; };
 		1897B7FB235EA4F600D737D3 /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1897B7FA235EA4F600D737D3 /* NibOwnerLoadable.swift */; };
+		3C5FE60623673D98004F42EC /* ItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FE60523673D98004F42EC /* ItemViewCell.swift */; };
+		3C5FE60823673DA5004F42EC /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C5FE60723673DA5004F42EC /* ItemViewCell.xib */; };
 		3C6C5F12235FEDAC0009412C /* KenBurns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C5F11235FEDAC0009412C /* KenBurns.swift */; };
 		3C6C5F14235FEDE10009412C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6C5F13235FEDE10009412C /* Helpers.swift */; };
 		D664F4962387E99C954E4010 /* Pods_KenBurnsProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C21566045BB0792D3F192EE /* Pods_KenBurnsProject.framework */; };
@@ -38,6 +40,8 @@
 		1897B7F8235EA21700D737D3 /* ControlsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlsView.xib; sourceTree = "<group>"; };
 		1897B7FA235EA4F600D737D3 /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
 		2BA2A66EDC576DA5AAB72C28 /* Pods-KenBurnsProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KenBurnsProject.release.xcconfig"; path = "Target Support Files/Pods-KenBurnsProject/Pods-KenBurnsProject.release.xcconfig"; sourceTree = "<group>"; };
+		3C5FE60523673D98004F42EC /* ItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCell.swift; sourceTree = "<group>"; };
+		3C5FE60723673DA5004F42EC /* ItemViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemViewCell.xib; sourceTree = "<group>"; };
 		3C6C5F11235FEDAC0009412C /* KenBurns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KenBurns.swift; sourceTree = "<group>"; };
 		3C6C5F13235FEDE10009412C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		5C21566045BB0792D3F192EE /* Pods_KenBurnsProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KenBurnsProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +119,8 @@
 				1897B7F8235EA21700D737D3 /* ControlsView.xib */,
 				3C6C5F11235FEDAC0009412C /* KenBurns.swift */,
 				3C6C5F13235FEDE10009412C /* Helpers.swift */,
+				3C5FE60523673D98004F42EC /* ItemViewCell.swift */,
+				3C5FE60723673DA5004F42EC /* ItemViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,6 +204,7 @@
 			files = (
 				1897B7F9235EA21700D737D3 /* ControlsView.xib in Resources */,
 				1897B7E8235E990E00D737D3 /* LaunchScreen.storyboard in Resources */,
+				3C5FE60823673DA5004F42EC /* ItemViewCell.xib in Resources */,
 				1897B7E5235E990E00D737D3 /* Assets.xcassets in Resources */,
 				1897B7E3235E990D00D737D3 /* Main.storyboard in Resources */,
 			);
@@ -257,6 +264,7 @@
 				3C6C5F14235FEDE10009412C /* Helpers.swift in Sources */,
 				1897B7DC235E990D00D737D3 /* AppDelegate.swift in Sources */,
 				1897B7F0235E997E00D737D3 /* KenBurnsViewController.swift in Sources */,
+				3C5FE60623673D98004F42EC /* ItemViewCell.swift in Sources */,
 				1897B7DE235E990D00D737D3 /* SceneDelegate.swift in Sources */,
 				1897B7FB235EA4F600D737D3 /* NibOwnerLoadable.swift in Sources */,
 				1897B7F6235EA1F900D737D3 /* ControlsView.swift in Sources */,

@@ -54,6 +54,21 @@ class KenBurnsViewController: UIViewController {
             self.lastPrevIndex = self.medias.count - pageSize
         }
         self.currentMediaIndex = currentMediaIndex
+        if currentMediaIndex == self.medias.count - 1 {
+            self.lastNextIndex = 0
+            self.lastPrevIndex = currentMediaIndex - 1
+        } else if currentMediaIndex == 0 {
+            self.lastNextIndex = currentMediaIndex + 1
+            self.lastPrevIndex = self.medias.count - 1
+        } else {
+            self.lastNextIndex = currentMediaIndex + 1
+            self.lastPrevIndex = currentMediaIndex - 1
+        }
+        
+    }
+    
+    @IBAction func onBack(sender: UIButton!) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func updateUI(with media: Media) {
@@ -110,9 +125,7 @@ class KenBurnsViewController: UIViewController {
     private func preloadNextImages() {
         DispatchQueue.global(qos: .background).async {
             if self.medias.count > self.lastNextIndex &&
-                self.currentMediaIndex >= self.lastNextIndex - 3 &&
-                self.currentMediaIndex < self.lastPrevIndex &&
-                self.lastPrevIndex > self.lastNextIndex {
+                self.currentMediaIndex >= self.lastNextIndex - 3 {
                 
                 var urls = [URL]()
                 if self.medias.count > self.lastNextIndex + self.pageSize {
@@ -132,9 +145,12 @@ class KenBurnsViewController: UIViewController {
                     }
                     self.lastNextIndex = self.medias.count
                 }
-                NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
                 SDWebImagePrefetcher.shared.prefetchURLs(urls)
+            } else if self.currentMediaIndex == self.medias.count - 2 {
+                self.lastNextIndex = 0
             }
+
+            NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
         }
     }
     
@@ -142,9 +158,7 @@ class KenBurnsViewController: UIViewController {
     private func preloadPrevImages() {
         DispatchQueue.global(qos: .background).async {
             if self.medias.count > self.pageSize &&
-                self.currentMediaIndex < self.lastPrevIndex + 3 &&
-                self.currentMediaIndex > self.lastNextIndex &&
-                self.lastPrevIndex > self.lastNextIndex {
+                self.currentMediaIndex < self.lastPrevIndex + 3 {
                 
                 var urls = [URL]()
                 if self.lastPrevIndex - self.pageSize > 0 {
@@ -162,7 +176,11 @@ class KenBurnsViewController: UIViewController {
                             urls.append(url)
                         }
                     }
-                    self.lastPrevIndex = 0
+                    if self.currentMediaIndex == 1 {
+                        self.lastPrevIndex = self.medias.count - 1
+                    } else {
+                        self.lastPrevIndex = 0
+                    }
                 }
                 NSLog("preloadPrevImages lastIndex: %d", self.lastPrevIndex)
                 SDWebImagePrefetcher.shared.prefetchURLs(urls)
