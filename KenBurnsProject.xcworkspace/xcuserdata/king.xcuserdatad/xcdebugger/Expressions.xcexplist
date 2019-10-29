@@ -3,14 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "KenBurnsImageView.startAnimating():KenBurns.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "isAnimating">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "KenBurnsAnimation.callCompletionIfNecessary():KenBurns.swift">
          <PersistentStrings>
             <PersistentString
@@ -23,6 +15,22 @@
          <PersistentStrings>
             <PersistentString
                value = "isFirstRun">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "KenBurnsImageView.startAnimating():KenBurns.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isAnimating">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in ViewController.downloadImage(url:completion:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "thumbnail.size">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

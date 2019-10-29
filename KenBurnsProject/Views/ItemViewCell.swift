@@ -13,6 +13,7 @@ class ItemViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
     func configure(media: Media) {
         titleLabel.text = media.title

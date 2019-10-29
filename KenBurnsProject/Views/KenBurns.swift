@@ -180,8 +180,14 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
     }
 
     public func fetchImage(_ url: URL, placeholder: UIImage?) {
-        [ currentImageView, nextImageView ].forEach {
-            $0.sd_setImageWithFadeAlways(with: url, placeholderImage: placeholder)
+        AppDelegate.imageManager.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, data, error, cacheTpe, state, rrr) in
+            [ self.currentImageView, self.nextImageView ].forEach {
+                if let img = image {
+                    $0.image = img
+                } else {
+                    $0.image = placeholder
+                }
+            }
         }
     }
 

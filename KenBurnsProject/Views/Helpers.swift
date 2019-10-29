@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageIO
 
 extension UIView {
     var x: CGFloat {
@@ -137,5 +138,92 @@ extension UIImageView {
                 self.image = placeholder
             }
         }
+    }
+}
+
+extension UIImage {
+    // Create thumbnail from image
+//    func getThumbnail() -> UIImage? {
+//        guard let imageData = self.pngData() else {
+//            return nil
+//        }
+//
+//        let options = [
+//            kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+//            kCGImageSourceCreateThumbnailWithTransform: true,
+//            kCGImageSourceShouldCacheImmediately: true,
+//            kCGImageSourceThumbnailMaxPixelSize: 300
+//        ] as CFDictionary
+//
+//        guard let source = CGImageSourceCreateWithData(imageData as CFData, nil),
+//            let imageReference = CGImageSourceCreateThumbnailAtIndex(source, 0, options) else {
+//            return nil
+//        }
+//
+//        return UIImage(cgImage: imageReference)
+//    }
+    
+    func getThumbnail(ratio: CGFloat) -> UIImage {
+        return self.crop(ratio: ratio).resize(toTargetSize: CGSize(width: 200, height: 200))
+    }
+    
+    func crop(ratio: CGFloat) -> UIImage {
+        let originalWidth  = self.size.width
+        let originalHeight = self.size.height
+        var x: CGFloat = 0.0
+        var y: CGFloat = 0.0
+        var newWidth: CGFloat = 0.0
+        var newHeight: CGFloat = 0.0
+        
+        if (originalWidth / ratio > originalHeight) {
+            // landscape
+            newHeight = originalHeight
+            newWidth = originalHeight / ratio
+            x = (originalWidth - newWidth) / 2.0
+            y = 0.0
+        } else {
+            // portrait
+            newWidth = originalWidth
+            newHeight = originalWidth * ratio
+            x = 0.0
+            y = (originalHeight - newHeight) / 2.0
+        }
+        
+        let cropSquare = CGRect(x: x, y: y, width: newWidth, height: newHeight)
+        let imageRef = self.cgImage!.cropping(to: cropSquare);
+        
+        return UIImage(cgImage: imageRef!, scale: UIScreen.main.scale, orientation: self.imageOrientation)
+    }
+    
+    func resize(toTargetSize targetSize: CGSize) -> UIImage {
+        // inspired by Hamptin Catlin
+        // https://gist.github.com/licvido/55d12a8eb76a8103c753
+
+        let newScale = self.scale // change this if you want the output image to have a different scale
+        let originalSize = self.size
+
+        let widthRatio = targetSize.width / originalSize.width
+        let heightRatio = targetSize.height / originalSize.height
+
+        // Figure out what our orientation is, and use that to form the rectangle
+        let newSize: CGSize
+        if widthRatio > heightRatio {
+            newSize = CGSize(width: floor(originalSize.width * heightRatio), height: floor(originalSize.height * heightRatio))
+        } else {
+            newSize = CGSize(width: floor(originalSize.width * widthRatio), height: floor(originalSize.height * widthRatio))
+        }
+
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(origin: .zero, size: newSize)
+
+        // Actually do the resizing to the rect using the ImageContext stuff
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = newScale
+        format.opaque = true
+        let newImage = UIGraphicsImageRenderer(bounds: rect, format: format).image() { _ in
+            self.draw(in: rect)
+        }
+
+        return newImage
     }
 }

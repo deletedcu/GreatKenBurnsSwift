@@ -21,8 +21,7 @@ class KenBurnsViewController: UIViewController {
     private var lastPrevIndex: Int! = 0
     private let pageSize: Int! = 5
     
-    let imageCache = NSCache<NSString, UIImage>()
-    var imagesArray = [UIImage]()
+    var imagePrefetcher: SDWebImagePrefetcher!
     
     private var currentMedia: Media {
         medias[currentMediaIndex]
@@ -30,7 +29,8 @@ class KenBurnsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSLog("viewDidLoad")
+        
+        imagePrefetcher = SDWebImagePrefetcher(imageManager: AppDelegate.imageManager)
         controlsView.delegate = self
         preloadNextImages()
         preloadPrevImages()
@@ -145,12 +145,12 @@ class KenBurnsViewController: UIViewController {
                     }
                     self.lastNextIndex = self.medias.count
                 }
-                SDWebImagePrefetcher.shared.prefetchURLs(urls)
+                self.imagePrefetcher.prefetchURLs(urls)
+                NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
             } else if self.currentMediaIndex == self.medias.count - 2 {
                 self.lastNextIndex = 0
             }
 
-            NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
         }
     }
     
@@ -183,7 +183,7 @@ class KenBurnsViewController: UIViewController {
                     }
                 }
                 NSLog("preloadPrevImages lastIndex: %d", self.lastPrevIndex)
-                SDWebImagePrefetcher.shared.prefetchURLs(urls)
+                self.imagePrefetcher.prefetchURLs(urls)
             }
         }
     }

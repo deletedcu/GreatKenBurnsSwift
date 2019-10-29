@@ -28,11 +28,12 @@
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="1MK-f9-WzI">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="q1r-9s-cgo">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="50" height="50"/>
                                         <connections>
                                             <segue destination="gE0-9Y-Aj4" kind="presentation" identifier="showKenBurns" modalPresentationStyle="fullScreen" id="sML-Lv-juw"/>
                                         </connections>
@@ -43,35 +44,17 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="t7x-pM-SfS"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="AjK-Jj-hTe">
-                                <rect key="frame" x="147" y="388" width="120" height="120"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="5X5-a8-7m0"/>
-                                    <constraint firstAttribute="height" constant="120" id="Xh0-ne-KS9"/>
-                                </constraints>
-                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6wR-AL-6RE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="0b5-OT-7qO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6wR-AL-6RE" secondAttribute="bottom" id="2aa-zp-nZw"/>
-                            <constraint firstItem="AjK-Jj-hTe" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7l7-g3-geq"/>
                             <constraint firstItem="6wR-AL-6RE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Jwv-r8-sEQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6wR-AL-6RE" secondAttribute="trailing" id="T4f-BK-FfQ"/>
-                            <constraint firstItem="AjK-Jj-hTe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="g2g-dW-fju"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="AjK-Jj-hTe" id="RNB-eh-o8X"/>
                         <outlet property="collectionView" destination="6wR-AL-6RE" id="21y-vy-u1a"/>
                     </connections>
                 </viewController>
@@ -88,7 +71,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-u4-qgd" customClass="KenBurnsImageView" customModule="KenBurnsProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1600" height="900"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1400" height="900"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0l-Cc-EcE" customClass="ControlsView" customModule="KenBurnsProject" customModuleProvider="target">

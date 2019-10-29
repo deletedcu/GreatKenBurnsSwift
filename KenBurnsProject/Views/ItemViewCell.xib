@@ -17,6 +17,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e1Y-0b-H54">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjI-Bw-2nS">
                         <rect key="frame" x="76.5" y="69.5" width="47.5" height="21"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -33,13 +36,24 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="BrS-rX-kpl" firstAttribute="centerX" secondItem="wPf-ug-zzO" secondAttribute="centerX" id="3k5-5v-xyS"/>
+                    <constraint firstItem="e1Y-0b-H54" firstAttribute="top" secondItem="wPf-ug-zzO" secondAttribute="top" id="6Md-L9-geN"/>
                     <constraint firstItem="BrS-rX-kpl" firstAttribute="top" secondItem="rjI-Bw-2nS" secondAttribute="bottom" constant="30" id="E2w-QJ-GRs"/>
+                    <constraint firstItem="e1Y-0b-H54" firstAttribute="leading" secondItem="wPf-ug-zzO" secondAttribute="leading" id="QiH-qc-R3u"/>
                     <constraint firstItem="rjI-Bw-2nS" firstAttribute="centerX" secondItem="wPf-ug-zzO" secondAttribute="centerX" id="XX6-aE-NMx"/>
+                    <constraint firstItem="e1Y-0b-H54" firstAttribute="height" secondItem="wPf-ug-zzO" secondAttribute="height" id="ofU-s1-sBd"/>
                     <constraint firstItem="rjI-Bw-2nS" firstAttribute="centerY" secondItem="wPf-ug-zzO" secondAttribute="centerY" constant="-20" id="qRm-6e-tHl"/>
+                    <constraint firstItem="e1Y-0b-H54" firstAttribute="width" secondItem="wPf-ug-zzO" secondAttribute="width" id="zvZ-Qo-awF"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                        <integer key="value" value="8"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                </userDefinedRuntimeAttributes>
             </collectionViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="BrS-rX-kpl" id="7dF-DD-XHP"/>
+                <outlet property="imageView" destination="e1Y-0b-H54" id="p6Q-Jh-zZ2"/>
                 <outlet property="titleLabel" destination="rjI-Bw-2nS" id="Get-HN-BDo"/>
             </connections>
             <point key="canvasLocation" x="-128" y="43"/>
