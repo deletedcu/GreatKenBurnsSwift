@@ -146,7 +146,6 @@ class KenBurnsViewController: UIViewController {
                     self.lastNextIndex = self.medias.count
                 }
                 self.imagePrefetcher.prefetchURLs(urls)
-                NSLog("preloadNextImages lastIndex: %d", self.lastNextIndex)
             } else if self.currentMediaIndex == self.medias.count - 2 {
                 self.lastNextIndex = 0
             }
@@ -182,7 +181,6 @@ class KenBurnsViewController: UIViewController {
                         self.lastPrevIndex = 0
                     }
                 }
-                NSLog("preloadPrevImages lastIndex: %d", self.lastPrevIndex)
                 self.imagePrefetcher.prefetchURLs(urls)
             }
         }

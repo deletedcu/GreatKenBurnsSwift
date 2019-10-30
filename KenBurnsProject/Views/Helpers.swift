@@ -127,46 +127,25 @@ extension UIImageView {
     /// Adds image fade animation support for SDWebImage.
     ///
     /// The image always fades in regardless if it is already in the cache.
-    func sd_setImageWithFadeAlways(with url: URL?, placeholderImage placeholder: UIImage? = nil) {
-        self.sd_setImage(with: url) { image, _, _, _ in
-            if let image = image {
-                UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                    self.image = image
-                }, completion: nil)
+    func setImageWithFade(image: UIImage?, placeholder: UIImage?) -> Void {
+        UIView.transition(with: self, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            if let img = image {
+                self.image = img
             } else {
-                // Error - use placeholder.
                 self.image = placeholder
             }
-        }
+            
+        }, completion: nil)
     }
 }
 
 extension UIImage {
     // Create thumbnail from image
-//    func getThumbnail() -> UIImage? {
-//        guard let imageData = self.pngData() else {
-//            return nil
-//        }
-//
-//        let options = [
-//            kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
-//            kCGImageSourceCreateThumbnailWithTransform: true,
-//            kCGImageSourceShouldCacheImmediately: true,
-//            kCGImageSourceThumbnailMaxPixelSize: 300
-//        ] as CFDictionary
-//
-//        guard let source = CGImageSourceCreateWithData(imageData as CFData, nil),
-//            let imageReference = CGImageSourceCreateThumbnailAtIndex(source, 0, options) else {
-//            return nil
-//        }
-//
-//        return UIImage(cgImage: imageReference)
-//    }
-    
     func getThumbnail(ratio: CGFloat) -> UIImage {
         return self.crop(ratio: ratio).resize(toTargetSize: CGSize(width: 200, height: 200))
     }
     
+    // Crop image according to the provided ratio
     func crop(ratio: CGFloat) -> UIImage {
         let originalWidth  = self.size.width
         let originalHeight = self.size.height
@@ -195,6 +174,7 @@ extension UIImage {
         return UIImage(cgImage: imageRef!, scale: UIScreen.main.scale, orientation: self.imageOrientation)
     }
     
+    // Resize the image
     func resize(toTargetSize targetSize: CGSize) -> UIImage {
         // inspired by Hamptin Catlin
         // https://gist.github.com/licvido/55d12a8eb76a8103c753

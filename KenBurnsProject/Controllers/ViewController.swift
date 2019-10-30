@@ -124,7 +124,6 @@ extension ViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemViewCell.reuseIdentifier, for: indexPath) as! ItemViewCell
         let media = self.medias[indexPath.row]
         cell.configure(media: media)
-        cell.imageView.size = cell.size
         cell.imageView.image = nil
         if let url = URL(string: media.image) {
             self.downloadImage(url: url) { (image, error) in
