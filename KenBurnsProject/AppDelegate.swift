@@ -10,13 +10,14 @@ import SDWebImage
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window : UIWindow?
     static var imageManager: SDWebImageManager!
+    static var imageCache: SDImageCache!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // Define SDWebImageManager instance
-        let cache = SDImageCache(namespace: "thumbnail_cache")
-        AppDelegate.imageManager = SDWebImageManager(cache: cache, loader: SDWebImageDownloader.shared)
+        AppDelegate.imageCache = SDImageCache(namespace: "thumbnail_cache")
+        AppDelegate.imageManager = SDWebImageManager(cache: AppDelegate.imageCache, loader: SDWebImageDownloader.shared)
         
         return true
     }

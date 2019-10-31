@@ -183,9 +183,16 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
         [ self.currentImageView, self.nextImageView ].forEach {
             $0.image = nil
         }
-        AppDelegate.imageManager.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, data, error, cacheTpe, state, rrr) in
-            [ self.currentImageView, self.nextImageView ].forEach {
-                $0.setImageWithFade(image: image, placeholder: placeholder)
+        AppDelegate.imageManager.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, data, error, cacheTpe, finished, rrr) in
+            if (image != nil && finished) {
+                AppDelegate.imageCache.queryCacheOperation(forKey: url.absoluteString, options: .queryDiskDataSync) { (image, data, cacheType) in
+                    if let image = image {
+                        [ self.currentImageView, self.nextImageView ].forEach {
+                            $0.setImageWithFade(image: image, placeholder: placeholder)
+                        }
+                    }
+                }
+                
             }
         }
     }
