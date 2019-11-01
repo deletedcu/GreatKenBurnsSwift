@@ -21,7 +21,6 @@ class KenBurnsViewController: UIViewController {
     private var lastPrevIndex: Int! = 0
     private let pageSize: Int! = 5
     
-    private let imageRatio: CGFloat = 2250 / 3654
     var imagePrefetcher: SDWebImagePrefetcher!
     
     private var currentMedia: Media {
@@ -30,11 +29,6 @@ class KenBurnsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let screenHeight = UIScreen.main.bounds.height
-        let imageHeight = screenHeight
-        let imageWidth = screenHeight * imageRatio
-        kenBurnsImageView.frame = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
         
         imagePrefetcher = SDWebImagePrefetcher(imageManager: AppDelegate.imageManager)
         controlsView.delegate = self

@@ -70,9 +70,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-u4-qgd" customClass="KenBurnsImageView" customModule="KenBurnsProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1400" height="900"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="mh5-u4-qgd" customClass="KenBurnsImageView" customModule="KenBurnsProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0l-Cc-EcE" customClass="ControlsView" customModule="KenBurnsProject" customModuleProvider="target">
                                 <rect key="frame" x="87" y="662" width="240" height="200"/>
@@ -97,8 +96,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="mh5-u4-qgd" firstAttribute="top" secondItem="Htg-aw-zK9" secondAttribute="top" id="0U0-ak-yNf"/>
                             <constraint firstItem="vpG-eX-bnS" firstAttribute="top" secondItem="m30-R3-Y72" secondAttribute="top" constant="20" id="8eu-am-FjY"/>
                             <constraint firstItem="d0l-Cc-EcE" firstAttribute="bottom" secondItem="m30-R3-Y72" secondAttribute="bottom" id="CsE-rT-Lcl"/>
+                            <constraint firstAttribute="bottom" secondItem="mh5-u4-qgd" secondAttribute="bottom" id="PGy-dr-lf2"/>
+                            <constraint firstItem="mh5-u4-qgd" firstAttribute="leading" secondItem="m30-R3-Y72" secondAttribute="leading" id="PfM-E8-8Eg"/>
+                            <constraint firstAttribute="trailing" secondItem="mh5-u4-qgd" secondAttribute="trailing" id="dTT-6o-myL"/>
                             <constraint firstItem="vpG-eX-bnS" firstAttribute="leading" secondItem="m30-R3-Y72" secondAttribute="leading" constant="20" id="lHY-d4-HUl"/>
                             <constraint firstItem="d0l-Cc-EcE" firstAttribute="centerX" secondItem="Htg-aw-zK9" secondAttribute="centerX" id="mBa-Y1-5db"/>
                         </constraints>
