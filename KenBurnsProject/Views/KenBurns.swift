@@ -184,7 +184,7 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
             $0.image = nil
         }
         NSLog("fetchImage - url: %@", url.absoluteString)
-        AppDelegate.imageManager.loadImage(with: url, options: [.continueInBackground, .scaleDownLargeImages], progress: nil) { (image, data, error, cacheTpe, finished, rrr) in
+        AppDelegate.imageManager.loadImage(with: url, options: [.continueInBackground, .scaleDownLargeImages, .retryFailed], progress: nil) { (image, data, error, cacheTpe, finished, rrr) in
             if (image != nil && finished) {
                 NSLog("fetchImage - loadImage - url: %@", rrr!.absoluteString)
                 AppDelegate.imageCache.queryCacheOperation(forKey: url.absoluteString, options: .queryDiskDataSync) { (image1, data1, cacheType1) in
