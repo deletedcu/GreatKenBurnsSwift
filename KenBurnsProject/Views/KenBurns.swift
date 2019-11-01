@@ -183,12 +183,15 @@ func ==(lhs: KenBurnsAnimation, rhs: KenBurnsAnimation) -> Bool {
         [ self.currentImageView, self.nextImageView ].forEach {
             $0.image = nil
         }
-        AppDelegate.imageManager.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, data, error, cacheTpe, finished, rrr) in
+        NSLog("fetchImage - url: %@", url.absoluteString)
+        AppDelegate.imageManager.loadImage(with: url, options: [.continueInBackground, .scaleDownLargeImages], progress: nil) { (image, data, error, cacheTpe, finished, rrr) in
             if (image != nil && finished) {
-                AppDelegate.imageCache.queryCacheOperation(forKey: url.absoluteString, options: .queryDiskDataSync) { (image, data, cacheType) in
-                    if let image = image {
+                NSLog("fetchImage - loadImage - url: %@", rrr!.absoluteString)
+                AppDelegate.imageCache.queryCacheOperation(forKey: url.absoluteString, options: .queryDiskDataSync) { (image1, data1, cacheType1) in
+                    if let image2 = image1 {
+                        NSLog("fetchImage - queryCache - url: %@", url.absoluteString)
                         [ self.currentImageView, self.nextImageView ].forEach {
-                            $0.setImageWithFade(image: image, placeholder: placeholder)
+                            $0.setImageWithFade(image: image2, placeholder: placeholder)
                         }
                     }
                 }

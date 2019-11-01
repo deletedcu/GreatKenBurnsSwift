@@ -82,7 +82,7 @@ class ViewController: UIViewController {
                     completion(cachedImage, nil)
                 }
             } else {
-                AppDelegate.imageManager.loadImage(with: url, options: [.continueInBackground, .retryFailed, .highPriority], progress: nil) { (image, data, err, cacheType, state, rrr) in
+                AppDelegate.imageManager.loadImage(with: url, options: [.continueInBackground, .scaleDownLargeImages], progress: nil) { (image, data, err, cacheType, state, rrr) in
                     DispatchQueue(label: "resize").async {
                         if let img = image {
                             let thumbnail = img.getThumbnail(ratio: 1.2)
