@@ -54,40 +54,13 @@ Due to unfortunate circumstances, Calm has no direct affiliation with [Ken Burns
 
 ## 🌱 Technologies and Frameworks
 <p>
-    <!-- React -->
-    <img src="https://img.shields.io/badge/React-61dafb?flat=plastic&logo=react&logoColor=black" height="32" alt="React" />
-    &nbsp;
-    <!-- Redux -->
-    <img src="https://img.shields.io/badge/Redux-764abc?flat=plastic&logo=redux&logoColor=white" height="32" alt="Redux" />
-    &nbsp;
-    <!-- Redux-Saga -->
-    <img src="https://img.shields.io/badge/Redux%20Saga-999999?flat=plastic&logo=redux-saga&logoColor=white" height="32" alt="Redux-Saga" />
-    &nbsp;
-    <!-- React Router -->
-    <img src="https://img.shields.io/badge/React%20Router-ca4245?flat=plastic&logo=react%20router&logoColor=white" height="32" alt="React Router" />
-    &nbsp;
-    <!-- Babel -->
-    <img src="https://img.shields.io/badge/Babel-f9dc3e?flat=plastic&logo=Babel&logoColor=black" height="32" alt="Babel" />
-    &nbsp;
-    <!-- Jest -->
-    <img src="https://img.shields.io/badge/Jest-c21325?flat=plastic&logo=jest&logoColor=white" height="32" alt="Jest" />
-    &nbsp;
-    <!-- npm -->
-    <img src="https://img.shields.io/badge/npm-cb3837?flat=plastic&logo=npm&logoColor=white" height="32" alt="npm" />
+    <!-- Swift -->
+    <img src="https://img.shields.io/badge/Swift-fa7343?flat=plastic&logo=swift&logoColor=black" height="32" alt="Swift" />
     &nbsp;
     <!-- CocoaPods -->
     <img src="https://img.shields.io/badge/CocoaPods-ee3322?flat=plastic&logo=cocoapods&logoColor=white" height="32" alt="CocoaPods" />
     &nbsp;
-    <!-- Gradle -->
-    <img src="https://img.shields.io/badge/Gradle-02303a?flat=plastic&logo=gradle&logoColor=white" height="32" alt="Gradle" />
-    &nbsp;
-    <!-- Bluetooth -->
-    <img src="https://img.shields.io/badge/Bluetooth-0082fc?flat=plastic&logo=bluetooth&logoColor=white" height="32" alt="Bluetooth" />
-    &nbsp;
     <!-- Xcode -->
     <img src="https://img.shields.io/badge/Xcode-147efb?flat=plastic&logo=xcode&logoColor=white" height="32" alt="Xcode" />
-    &nbsp;
-    <!-- Android Studio -->
-    <img src="https://img.shields.io/badge/Android%20Studio-3ddc84?flat=plastic&logo=android%20studio&logoColor=white" height="32" alt="Android Studio" />
     &nbsp;
 </p>
