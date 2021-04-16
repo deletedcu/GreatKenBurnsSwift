@@ -8,7 +8,9 @@
   <img src="https://img.shields.io/badge/Supported%20by-Xcode%20Power%20User%20%E2%86%92-gray.svg?colorA=655BE1&colorB=4F44D6&style=for-the-badge"/>
 </p>
 
-![burns](KenBurns.gif)
+<p align="center">
+    <img src="KenBurns.gif"/>
+</p>
 
 A simple yet configurable Ken Burns effect using a single image looping over itself. Really draws the user’s attention, much more so than a static image.
 
